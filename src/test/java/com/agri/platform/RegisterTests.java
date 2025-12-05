@@ -1,35 +1,64 @@
 package com.agri.platform;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
+
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.when;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.agri.platform.DTO.UserRegisterDTO;
 import com.agri.platform.entity.User;
+import com.agri.platform.mapper.UserMapper;
 import com.agri.platform.enums.UserLoginType;
 import com.agri.platform.exception.BizException;
 import com.agri.platform.service.UserRegisterService;
 
-@SpringBootTest
+@ExtendWith(MockitoExtension.class)
 public class RegisterTests {
-    @Autowired
+    @Mock
+    private UserMapper userMapper;
+    @InjectMocks
     private UserRegisterService userRegisterService;
 
     @Test
     void testNormalRegister() {
-        // Add test cases for user registration here
         UserRegisterDTO byUsername = new UserRegisterDTO(UserLoginType.USERNAME, "testuser", "password123");
+
+        User byU = User.builder()
+        .userId("UUID-0001")
+        .username("testuser")
+        .passwordHash("1234")
+        .build();
+
+        User byE = User.builder()
+        .userId("UUID-0002")
+        .email("1983517529@qq.com")
+        .passwordHash("1234")
+        .build();
+
+        User byP = User.builder()
+        .userId("UUID-0003")
+        .phoneNumber("13517529835")
+        .passwordHash("1234")
+        .build();
 
         UserRegisterDTO byEmail = new UserRegisterDTO(UserLoginType.EMAIL, "1983517529@qq.com", "password123");
 
         UserRegisterDTO byPhoneNumber = new UserRegisterDTO(UserLoginType.PHONE_NUMBER, "13517529835", "password123");
 
-        User user = userRegisterService.registerUser(byUsername);
+        when(userMapper.insertUser(byU)).thenReturn(1);
+        when(userMapper.insertUser(byE)).thenReturn(1);
+        when(userMapper.insertUser(byP)).thenReturn(1);
 
-        User user2 = userRegisterService.registerUser(byEmail);
-
-        User user3 = userRegisterService.registerUser(byPhoneNumber);
+        assertDoesNotThrow(() -> userRegisterService.registerUser(byUsername));
+        assertDoesNotThrow(() -> userRegisterService.registerUser(byEmail));
+        assertDoesNotThrow(() -> userRegisterService.registerUser(byPhoneNumber));
     }
 
     @Test
