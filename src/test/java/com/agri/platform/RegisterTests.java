@@ -9,9 +9,11 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.RETURNS_DEEP_STUBS;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -71,7 +73,7 @@ public class RegisterTests {
         when(fakeLoginDto.type()).thenReturn(UserLoginType.USERNAME);
         when(fakeLoginDto.login()).thenReturn("testuser");
         when(fakeLoginDto.password()).thenReturn("");
-        
+
         BizException ex1 = assertThrows(BizException.class, () -> {
         userRegisterService.registerUser(missingLogin);
         });
@@ -89,12 +91,13 @@ public class RegisterTests {
     void testDuplicateRegister() {
         UserRegisterDTO dto = new UserRegisterDTO(UserLoginType.USERNAME, "duplicateUser", "password123");
 
-        userRegisterService.registerUser(dto);
+        when(userMapper.countByUsername("duplicateUser")).thenReturn(1);
 
         BizException ex = assertThrows(BizException.class, () -> {
             userRegisterService.registerUser(dto);
         });
 
         assertTrue(ex.getMessage().contains("已存在"));
+        verify(userMapper, never()).insertUser(any(User.class));
     }
 }
