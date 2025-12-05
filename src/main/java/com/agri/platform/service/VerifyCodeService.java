@@ -22,7 +22,7 @@ public class VerifyCodeService {
     private final Map<String, ICodeSender> codeSenders;
 
     public void sendCode(String bizType, String target) {
-        String code = RandomStringUtils.randomNumeric(6);
+        String code = RandomStringUtils.insecure().nextNumeric(6);
         LocalDateTime expireTime = LocalDateTime.now().plusMinutes(10);
         codeMapper.saveCode(bizType, target, code, expireTime);
         ICodeSender sender = codeSenders.get(target.contains("@") ? "emailCodeSender" : "smsCodeSender");
