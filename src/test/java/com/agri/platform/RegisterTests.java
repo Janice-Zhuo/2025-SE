@@ -2,11 +2,14 @@ package com.agri.platform;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,35 +33,50 @@ public class RegisterTests {
     void testNormalRegister() {
         UserRegisterDTO byUsername = new UserRegisterDTO(UserLoginType.USERNAME, "testuser", "password123");
 
-        User byU = User.builder()
-        .userId("UUID-0001")
-        .username("testuser")
-        .passwordHash("1234")
-        .build();
+        // User byU = User.builder()
+        // .userId("UUID-0001")
+        // .username("testuser")
+        // .passwordHash("1234")
+        // .build();
 
-        User byE = User.builder()
-        .userId("UUID-0002")
-        .email("1983517529@qq.com")
-        .passwordHash("1234")
-        .build();
+        // User byE = User.builder()
+        // .userId("UUID-0002")
+        // .email("1983517529@qq.com")
+        // .passwordHash("1234")
+        // .build();
 
-        User byP = User.builder()
-        .userId("UUID-0003")
-        .phoneNumber("13517529835")
-        .passwordHash("1234")
-        .build();
+        // User byP = User.builder()
+        // .userId("UUID-0003")
+        // .phoneNumber("13517529835")
+        // .passwordHash("1234")
+        // .build();
 
         UserRegisterDTO byEmail = new UserRegisterDTO(UserLoginType.EMAIL, "1983517529@qq.com", "password123");
 
         UserRegisterDTO byPhoneNumber = new UserRegisterDTO(UserLoginType.PHONE_NUMBER, "13517529835", "password123");
 
-        when(userMapper.insertUser(byU)).thenReturn(1);
-        when(userMapper.insertUser(byE)).thenReturn(1);
-        when(userMapper.insertUser(byP)).thenReturn(1);
+        // when(userMapper.insertUser(byU)).thenReturn(1);
+        // when(userMapper.insertUser(byE)).thenReturn(1);
+        // when(userMapper.insertUser(byP)).thenReturn(1);
 
         assertDoesNotThrow(() -> userRegisterService.registerUser(byUsername));
+
+        ArgumentCaptor<User> captor = ArgumentCaptor.forClass(User.class);
+        verify(userMapper, times(1)).insertUser(captor.capture());
+
+        User capturedUser = captor.getValue();
+
+        assertEquals("testuser", capturedUser.getUsername());
         assertDoesNotThrow(() -> userRegisterService.registerUser(byEmail));
+
+        verify(userMapper, times(2)).insertUser(captor.capture());
+        capturedUser = captor.getValue();
+        assertEquals("1983517529@qq.com", capturedUser.getEmail());
         assertDoesNotThrow(() -> userRegisterService.registerUser(byPhoneNumber));
+
+        verify(userMapper, times(3)).insertUser(captor.capture());
+        capturedUser = captor.getValue();
+        assertEquals("13517529835", capturedUser.getPhoneNumber());
     }
 
     @Test
