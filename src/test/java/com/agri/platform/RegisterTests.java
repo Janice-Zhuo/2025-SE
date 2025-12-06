@@ -16,9 +16,6 @@ import static org.mockito.Mockito.when;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.RETURNS_DEEP_STUBS;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-
 import com.agri.platform.DTO.UserRegisterDTO;
 import com.agri.platform.entity.User;
 import com.agri.platform.mapper.UserMapper;
