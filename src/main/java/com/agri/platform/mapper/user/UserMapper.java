@@ -19,7 +19,9 @@ public interface UserMapper {
     @Results(id = "userMap", value = {
             @Result(property = "accountStatus", column = "account_status", javaType = User.AccountStatus.class, typeHandler = EnumTypeHandler.class)
     })
-
+    @Select("SELECT 1")
+    void userMap();
+    
     @Insert("""
             INSERT INTO t_user (user_id, username, password, email, phone_number)
             VALUES (#{userId}, #{username}, #{password}, #{email}, #{phoneNumber})
