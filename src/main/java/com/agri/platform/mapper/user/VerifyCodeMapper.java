@@ -18,6 +18,8 @@ public interface VerifyCodeMapper {
         @Results(id = "verifyCodeMap", value = {
                         @Result(property = "bizType", column = "biz_type", javaType = VerifyCode.BizType.class, typeHandler = EnumTypeHandler.class)
         })
+        @Select("SELECT 1")
+        void verifyCodeMap();
 
         @Insert("""
                         INSERT INTO t_verify_code (biz_type, target, code, expire_time)
