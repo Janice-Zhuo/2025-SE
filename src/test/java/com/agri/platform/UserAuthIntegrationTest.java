@@ -158,10 +158,6 @@ public class UserAuthIntegrationTest {
          */
         @Test
         public void testLoginWithWrongEmail() throws Exception {
-                // 事先准备一个已注册用户（复用注册逻辑）
-                String email = "1983517529@qq.com";
-                String rawPwd = "Test@123456";
-
                 UserLoginDTO dto = new UserLoginDTO(
                                 "wrong_email@example.com",
                                 "Whatever@123",
@@ -185,7 +181,6 @@ public class UserAuthIntegrationTest {
         @Test
         public void testLoginWithWrongPassword() throws Exception {
                 String email = "1983517529@qq.com";
-                String rightPwd = "Test@123456";
 
                 // 用错误密码登录
                 UserLoginDTO dto = new UserLoginDTO(email, "Wrong@000", UserLoginType.EMAIL, null);
@@ -205,7 +200,6 @@ public class UserAuthIntegrationTest {
          */
         @Test
         public void testLoginViaPhoneWhenNoPhoneBound() throws Exception {
-                String email = "1983517529@qq.com";
                 String pwd = "Test@123456";
                 // 尝试用手机号登录（数据库里没有手机号）
                 UserLoginDTO dto = new UserLoginDTO(
