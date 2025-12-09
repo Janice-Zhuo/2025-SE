@@ -1,4 +1,4 @@
-package com.agri.platform.config;
+package com.agri.platform.config.users;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;

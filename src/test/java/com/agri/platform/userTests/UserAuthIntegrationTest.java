@@ -1,4 +1,4 @@
-package com.agri.platform;
+package com.agri.platform.userTests;
 
 import com.agri.platform.DTO.UserLoginDTO;
 import com.agri.platform.DTO.UserRegisterDTO;
@@ -87,7 +87,7 @@ public class UserAuthIntegrationTest {
                                 "1983517529@qq.com",
                                 "Test@123456", correctCode);
 
-                MvcResult result = mockMvc.perform(post("/api/users/register")
+                MvcResult result = mockMvc.perform(post("/api/user/register")
                                 .contentType(MediaType.APPLICATION_JSON)
                                 .content(objectMapper.writeValueAsString(registerDTO)).with(csrf()))
                                 .andExpect(status().isOk())
@@ -121,7 +121,7 @@ public class UserAuthIntegrationTest {
                                 correctCode);
 
                 // 4. 发起注册请求，断言 400
-                MvcResult result = mockMvc.perform(post("/api/users/register")
+                MvcResult result = mockMvc.perform(post("/api/user/register")
                                 .contentType(MediaType.APPLICATION_JSON)
                                 .content(objectMapper.writeValueAsString(dtoMissingPwd))
                                 .with(csrf()))
@@ -141,7 +141,7 @@ public class UserAuthIntegrationTest {
 
                 // 正式登录
                 UserLoginDTO loginDTO = new UserLoginDTO(email, rawPwd, UserLoginType.EMAIL, null);
-                MvcResult result = mockMvc.perform(post("/api/auth/login")
+                MvcResult result = mockMvc.perform(post("/api/user/login")
                                 .contentType(MediaType.APPLICATION_JSON)
                                 .content(objectMapper.writeValueAsString(loginDTO))
                                 .with(csrf()))
@@ -164,7 +164,7 @@ public class UserAuthIntegrationTest {
                                 UserLoginType.EMAIL,
                                 null);
 
-                MvcResult result = mockMvc.perform(post("/api/auth/login")
+                MvcResult result = mockMvc.perform(post("/api/user/login")
                                 .contentType(MediaType.APPLICATION_JSON)
                                 .content(objectMapper.writeValueAsString(dto))
                                 .with(csrf()))
@@ -184,7 +184,7 @@ public class UserAuthIntegrationTest {
 
                 // 用错误密码登录
                 UserLoginDTO dto = new UserLoginDTO(email, "Wrong@000", UserLoginType.EMAIL, null);
-                MvcResult result = mockMvc.perform(post("/api/auth/login")
+                MvcResult result = mockMvc.perform(post("/api/user/login")
                                 .contentType(MediaType.APPLICATION_JSON)
                                 .content(objectMapper.writeValueAsString(dto))
                                 .with(csrf()))
@@ -205,7 +205,7 @@ public class UserAuthIntegrationTest {
                 UserLoginDTO dto = new UserLoginDTO(
                                 "13800138000",
                                 pwd, UserLoginType.PHONE_NUMBER, null);
-                MvcResult result = mockMvc.perform(post("/api/auth/login")
+                MvcResult result = mockMvc.perform(post("/api/user/login")
                                 .contentType(MediaType.APPLICATION_JSON)
                                 .content(objectMapper.writeValueAsString(dto))
                                 .with(csrf()))

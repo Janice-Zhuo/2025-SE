@@ -1,4 +1,4 @@
-package com.agri.platform;
+package com.agri.platform.userTests;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +25,7 @@ public class AuthIntegrationTest {
     /* 工具：模拟登录，返回带权限的 Session */
     private MockHttpSession login() throws Exception {
         MockHttpSession session = (MockHttpSession) mvc.perform(
-                post("/api/auth/login")
+                post("/api/user/login")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("{\"login\":\"Test@123456\",\"password\":\"Test@123456\",\"type\":\"USERNAME\",\"ip\":\"127.0.0.1\"}").with(csrf()))
                 .andExpect(status().isOk())

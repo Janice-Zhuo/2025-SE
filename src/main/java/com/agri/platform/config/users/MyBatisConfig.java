@@ -1,4 +1,4 @@
-package com.agri.platform.config;
+package com.agri.platform.config.users;
 
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.annotation.MapperScan;

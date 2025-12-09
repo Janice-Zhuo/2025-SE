@@ -1,4 +1,4 @@
-package com.agri.platform;
+package com.agri.platform.userTests;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

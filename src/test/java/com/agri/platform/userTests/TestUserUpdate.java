@@ -1,4 +1,4 @@
-package com.agri.platform;
+package com.agri.platform.userTests;
 
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
