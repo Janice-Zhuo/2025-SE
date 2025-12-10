@@ -38,8 +38,6 @@ logging:
     org.springframework.web: WARN
     org.mybatis: trace
     com.agri.platform.mapper: trace
-    org.springframework.aop: debug
-    org.springframework.aop.aspectj: trace
 
 # ===== 文件上传 =====
 spring.servlet.multipart.enabled: false
