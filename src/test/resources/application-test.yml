@@ -17,7 +17,9 @@ spring:
     configuration:
       map-underscore-to-camel-case: true
     mapper-locations: classpath*:/mapper/**/*.xml   # 没有 xml 可留空
-
+platform:
+  audit:
+    enable: true
   # ===== 关闭外部组件 =====
   redis:
     host: disabled
@@ -36,6 +38,8 @@ logging:
     org.springframework.web: WARN
     org.mybatis: trace
     com.agri.platform.mapper: trace
+    org.springframework.aop: debug
+    org.springframework.aop.aspectj: trace
 
 # ===== 文件上传 =====
 spring.servlet.multipart.enabled: false
