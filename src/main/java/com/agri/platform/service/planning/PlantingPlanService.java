@@ -6,6 +6,7 @@ import com.agri.platform.mapper.planning.PlantingPlanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
+import java.util.List;
 
 @Service
 public class PlantingPlanService {
@@ -45,7 +46,7 @@ public class PlantingPlanService {
 
 
     // 按农场主ID查询种植计划
-    public java.util.List<PlantingPlan> getPlansByFarmerId(Long farmerId) {
+    public List<PlantingPlan> getPlansByFarmerId(String farmerId) {
         return plantingPlanMapper.selectByFarmerId(farmerId);
     }
 }
