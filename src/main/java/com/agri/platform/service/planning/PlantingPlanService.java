@@ -43,6 +43,8 @@ public class PlantingPlanService {
         return plantingArea.multiply(perUnitYield); // 总产量 = 面积 * 单产
     }
 
+
+
     // 按农场主ID查询种植计划
     public List<PlantingPlan> getPlansByFarmerId(String farmerId) {
         return plantingPlanMapper.selectByFarmerId(farmerId);
