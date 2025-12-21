@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- namespace必须是ContactMapper接口的全类名，不能错！ -->
-<mapper namespace="com.agri.platform.mapper.ContactMapper">
+<mapper namespace="com.agri.platform.planning.mapper.ContactMapper">
 
     <!-- 插入方法：id="insertContact" 对应接口中 insertContact(Contact contact) -->
     <insert id="insertContact" parameterType="com.agri.platform.entity.Contact">

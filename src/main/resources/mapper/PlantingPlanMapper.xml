@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.agri.platform.mapper.PlantingPlanMapper">
+<mapper namespace="com.agri.platform.mapper.planning.PlantingPlanMapper">
     <!-- 按农场主ID查询种植计划 -->
     <select id="selectByFarmerId" resultType="com.agri.platform.entity.PlantingPlan">
         SELECT * FROM t_planting_plan WHERE farmer_id = #{farmerId}
