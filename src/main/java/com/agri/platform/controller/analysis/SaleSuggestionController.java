@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.agri.platform.entity.analysis.SaleSuggestion;
+import com.agri.platform.service.analysis.SaleSuggestionService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -13,7 +14,7 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("/analysis")
 @RequiredArgsConstructor
 public class SaleSuggestionController {
-    SaleSuggestionService saleSuggestionService;
+    private final SaleSuggestionService saleSuggestionService;
     @GetMapping("/suggestion")
     public SaleSuggestion Suggestion(@RequestParam String crop, @RequestParam String channel) {
         return saleSuggestionService.getSuggestion(crop, channel);
