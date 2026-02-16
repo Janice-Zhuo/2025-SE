@@ -21,7 +21,6 @@ import com.agri.platform.enums.ReportTypeEnum;
 import com.agri.platform.VO.report.ReportDetailVO;
 import com.agri.platform.VO.report.ReportListVO;
 import com.agri.platform.VO.report.VersionDiffVO;
-import com.agri.platform.service.report.ReportService;
 import com.agri.platform.interfaces.MarketClient;
 import com.agri.platform.interfaces.MonitorClient;
 import com.agri.platform.interfaces.PlantingClient;

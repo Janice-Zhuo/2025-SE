@@ -1,6 +1,5 @@
 package com.agri.platform.controller.report;
 
-import com.agri.platform.entity.report.ExportLog;
 import org.springframework.web.bind.annotation.*;
 import com.agri.platform.service.report.ReportExportService;
 import com.agri.platform.enums.ExportFormatEnum;
